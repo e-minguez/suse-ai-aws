@@ -1,3 +1,7 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_cidr
   enable_dns_support   = true
@@ -11,7 +15,7 @@ resource "aws_vpc" "main" {
 resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.main.id
   cidr_block        = var.public_subnet_cidr
-  availability_zone = var.availability_zone
+  availability_zone = var.availability_zone != null ? var.availability_zone : data.aws_availability_zones.available.names[0]
 
   tags = merge(var.common_tags, {
     Name = "${var.project_name}-public-subnet"

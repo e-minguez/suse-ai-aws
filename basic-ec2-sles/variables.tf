@@ -34,7 +34,7 @@ variable "public_subnet_cidr" {
 variable "availability_zone" {
   description = "The availability zone for the subnet"
   type        = string
-  default     = "eu-central-1a"
+  default     = null
 }
 
 variable "instance_type" {
