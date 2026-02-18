@@ -31,6 +31,12 @@ resource "aws_instance" "app_server" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
 
+  root_block_device {
+    volume_size           = var.root_volume_size
+    volume_type           = var.root_volume_type
+    delete_on_termination = var.root_volume_delete_on_termination
+  }
+
   tags = merge(var.common_tags, {
     Name = "${var.project_name}-app-server"
   })

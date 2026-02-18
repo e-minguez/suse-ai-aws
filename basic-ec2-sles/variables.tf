@@ -43,6 +43,24 @@ variable "instance_type" {
   default     = "t2.micro"
 }
 
+variable "root_volume_size" {
+  description = "The size of the root volume in GB"
+  type        = number
+  default     = 50
+}
+
+variable "root_volume_type" {
+  description = "The type of the root volume (e.g., gp3, gp2, io1)"
+  type        = string
+  default     = "gp3"
+}
+
+variable "root_volume_delete_on_termination" {
+  description = "Whether the root volume should be deleted when the instance is terminated"
+  type        = bool
+  default     = true
+}
+
 variable "ssh_public_key_path" {
   description = "The path to the SSH public key file (e.g., ~/.ssh/id_rsa.pub)"
   type        = string
