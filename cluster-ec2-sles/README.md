@@ -1,13 +1,15 @@
-# Basic EC2 SLES Deployment with Terraform
+# Cluster EC2 SLES Deployment for GPUDirect RDMA/EFA Testing
 
-This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS within a dedicated VPC, including all necessary networking components and security groups.
+This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cluster Placement Group** within the same subnet and Availability Zone on AWS. This setup is optimized for low-latency network performance between instances, specifically intended for testing **GPUDirect RDMA** with **AWS EFA**.
 
 ## Features
 
+-   **Cluster Placement Group**: Ensures instances are physically located close to each other for high-performance networking.
+-   **GPU Nodes**: Deploys 2 `gpu-node` instances by default.
+-   **Self-Referencing Security Group**: Allows all traffic between the instances in the cluster.
+-   **Modern Instance Type**: Defaults to `g7e.12xlarge` (NVIDIA Blackwell).
 -   **Modular Structure**: Networking, security, and compute resources are separated into different files.
 -   **Dynamic Naming**: All resources are named based on a `project_name` variable.
--   **Common Tagging**: A standard set of tags is applied to all created resources.
--   **Secure Access**: Automatically creates an AWS Key Pair from your local SSH public key and allows SSH ingress.
 
 ## Prerequisites
 
@@ -17,11 +19,11 @@ This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS
 
 ## File Structure
 
--   `main.tf`: Provider configuration, AMI data source, and EC2 instance.
+-   `main.tf`: Provider configuration, AMI data source, Placement Group, and EC2 instances.
 -   `vpc.tf`: VPC, Subnet, Internet Gateway, and Route Tables.
--   `security_groups.tf`: Security group allowing SSH (port 22).
+-   `security_groups.tf`: Security group allowing SSH and all internal traffic.
 -   `variables.tf`: Input variables for customization.
--   `outputs.tf`: Outputs like the instance's public IP.
+-   `outputs.tf`: Outputs like the instances' public IPs.
 -   `terraform.tf`: Terraform and provider version constraints.
 
 ## Usage
@@ -55,7 +57,7 @@ terraform apply
 
 ### 4. Connect
 
-Once the deployment is complete, Terraform will output the public IP. Connect using:
+Once the deployment is complete, Terraform will output the public IPs. Connect to either instance using:
 
 ```bash
 ssh -i /path/to/your/private_key ec2-user@<instance_public_ip>
@@ -69,8 +71,6 @@ To remove all resources created by this project and avoid ongoing AWS costs, run
 terraform destroy
 ```
 
-> **Note**: You may need to provide the same variables (like `ssh_public_key_path`) used during `apply` so Terraform can successfully refresh the state before destroying.
-
 ## Variables
 
 | Name | Description | Default |
@@ -78,6 +78,6 @@ terraform destroy
 | `project_name` | Prefix for resource names | `edu` |
 | `region` | AWS region | `eu-central-1` |
 | `ssh_public_key_path` | Path to your `.pub` file | (Required) |
-| `instance_type` | EC2 instance size | `t2.micro` |
-| `root_volume_size` | Size of the root volume in GB | `50` |
+| `instance_type` | EC2 instance size | `g7e.12xlarge` |
+| `root_volume_size` | Size of the root volume in GB | `100` |
 | `common_tags` | Map of tags for all resources | `{ Environment = "dev", ... }` |
