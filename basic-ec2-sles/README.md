@@ -1,5 +1,7 @@
 # Basic EC2 SLES Deployment with Terraform or OpenTofu
 
+> **Disclaimer**: This is a personal project and is NOT an official SUSE or AWS repository. The content and code provided here are for educational and testing purposes, and are not officially supported.
+
 This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS within a dedicated VPC, including all necessary networking components and security groups. This module is compatible with both Terraform and OpenTofu.
 
 ## Features

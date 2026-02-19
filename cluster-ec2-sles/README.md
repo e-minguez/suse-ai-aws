@@ -1,5 +1,7 @@
 # Cluster EC2 SLES Deployment for GPUDirect RDMA/EFA Testing with Terraform or OpenTofu
 
+> **Disclaimer**: This is a personal project and is NOT an official SUSE or AWS repository. The content and code provided here are for educational and testing purposes, and are not officially supported.
+
 This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cluster Placement Group** within the same subnet and Availability Zone on AWS. This setup is optimized for low-latency network performance between instances, specifically intended for testing **GPUDirect RDMA** with **AWS EFA**. This module is compatible with both Terraform and OpenTofu.
 
 ## Features
