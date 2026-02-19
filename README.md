@@ -1,6 +1,6 @@
-# Terraform and OpenTofu AWS AI
+# suse-ai-aws
 
-This repository contains Terraform and OpenTofu modules and examples for deploying AI-related infrastructure on AWS.
+This repository contains OpenTofu and Terraform modules to deploy **SUSE AI** infrastructure on AWS.
 
 ## Projects
 
