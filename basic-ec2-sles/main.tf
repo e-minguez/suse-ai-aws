@@ -23,7 +23,7 @@ resource "aws_key_pair" "deployer" {
   })
 }
 
-resource "aws_instance" "app_server" {
+resource "aws_instance" "sles_instance" {
   ami                         = data.aws_ami.sles.id
   instance_type               = var.instance_type
   subnet_id                   = aws_subnet.public.id
@@ -38,6 +38,6 @@ resource "aws_instance" "app_server" {
   }
 
   tags = merge(var.common_tags, {
-    Name = "${var.project_name}-app-server"
+    Name = "${var.project_name}-sles-instance"
   })
 }
