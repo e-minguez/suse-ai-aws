@@ -1,6 +1,6 @@
-# Cluster EC2 SLES Deployment for GPUDirect RDMA/EFA Testing
+# Cluster EC2 SLES Deployment for GPUDirect RDMA/EFA Testing with Terraform or OpenTofu
 
-This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cluster Placement Group** within the same subnet and Availability Zone on AWS. This setup is optimized for low-latency network performance between instances, specifically intended for testing **GPUDirect RDMA** with **AWS EFA**.
+This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cluster Placement Group** within the same subnet and Availability Zone on AWS. This setup is optimized for low-latency network performance between instances, specifically intended for testing **GPUDirect RDMA** with **AWS EFA**. This module is compatible with both Terraform and OpenTofu.
 
 ## Features
 
@@ -13,7 +13,7 @@ This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cl
 
 ## Prerequisites
 
--   [Terraform](https://www.terraform.io/downloads.html) (>= 1.2)
+-   [OpenTofu](https://opentofu.org/docs/intro/install/) (>= 1.6) or [Terraform](https://www.terraform.io/downloads.html) (>= 1.2)
 -   AWS CLI configured with appropriate credentials.
 -   An existing SSH key pair on your host.
 
@@ -28,10 +28,10 @@ This project deploys two SUSE Linux Enterprise Server (SLES) instances in a **Cl
 
 ## Usage
 
-### 1. Initialize Terraform
+### 1. Initialize
 
 ```bash
-terraform init
+tofu init # or terraform init
 ```
 
 ### 2. Specify your SSH Public Key
@@ -52,12 +52,12 @@ project_name        = "my-suse-project"
 ### 3. Deploy
 
 ```bash
-terraform apply
+tofu apply # or terraform apply
 ```
 
 ### 4. Connect
 
-Once the deployment is complete, Terraform will output the public IPs. Connect to either instance using:
+Once the deployment is complete, the tool will output the public IPs. Connect to either instance using:
 
 ```bash
 ssh -i /path/to/your/private_key ec2-user@<instance_public_ip>
@@ -68,7 +68,7 @@ ssh -i /path/to/your/private_key ec2-user@<instance_public_ip>
 To remove all resources created by this project and avoid ongoing AWS costs, run:
 
 ```bash
-terraform destroy
+tofu destroy # or terraform destroy
 ```
 
 ## Variables

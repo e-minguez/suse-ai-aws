@@ -1,6 +1,6 @@
-# Basic EC2 SLES Deployment with Terraform
+# Basic EC2 SLES Deployment with Terraform or OpenTofu
 
-This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS within a dedicated VPC, including all necessary networking components and security groups.
+This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS within a dedicated VPC, including all necessary networking components and security groups. This module is compatible with both Terraform and OpenTofu.
 
 ## Features
 
@@ -11,7 +11,7 @@ This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS
 
 ## Prerequisites
 
--   [Terraform](https://www.terraform.io/downloads.html) (>= 1.2)
+-   [OpenTofu](https://opentofu.org/docs/intro/install/) (>= 1.6) or [Terraform](https://www.terraform.io/downloads.html) (>= 1.2)
 -   AWS CLI configured with appropriate credentials.
 -   An existing SSH key pair on your host.
 
@@ -26,10 +26,10 @@ This project deploys a basic SUSE Linux Enterprise Server (SLES) instance on AWS
 
 ## Usage
 
-### 1. Initialize Terraform
+### 1. Initialize
 
 ```bash
-terraform init
+tofu init # or terraform init
 ```
 
 ### 2. Specify your SSH Public Key
@@ -50,12 +50,12 @@ project_name        = "my-suse-project"
 ### 3. Deploy
 
 ```bash
-terraform apply
+tofu apply # or terraform apply
 ```
 
 ### 4. Connect
 
-Once the deployment is complete, Terraform will output the public IP. Connect using:
+Once the deployment is complete, the tool will output the public IP. Connect using:
 
 ```bash
 ssh -i /path/to/your/private_key ec2-user@<instance_public_ip>
@@ -66,10 +66,10 @@ ssh -i /path/to/your/private_key ec2-user@<instance_public_ip>
 To remove all resources created by this project and avoid ongoing AWS costs, run:
 
 ```bash
-terraform destroy
+tofu destroy # or terraform destroy
 ```
 
-> **Note**: You may need to provide the same variables (like `ssh_public_key_path`) used during `apply` so Terraform can successfully refresh the state before destroying.
+> **Note**: You may need to provide the same variables (like `ssh_public_key_path`) used during `apply` so the tool can successfully refresh the state before destroying.
 
 ## Variables
 
