@@ -1,5 +1,7 @@
 # suse-ai-aws
 
+![suse-ai-aws-logo](assets/suse-ai-aws-logo.jpg)
+
 > **Disclaimer**: This is a personal project and is NOT an official SUSE or AWS repository. The content and code provided here are for educational and testing purposes, and are not officially supported.
 
 This repository contains OpenTofu and Terraform modules to deploy **SUSE AI** infrastructure on AWS.
